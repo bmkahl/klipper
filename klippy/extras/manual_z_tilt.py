@@ -40,7 +40,7 @@ class ManualZTilt:
             self.gcode.respond_info("Congratulations, \
                                     Your X Axis is Calibrated!")
 
-        elif calculated_turn > .25:
+        elif calculated_turn < .25:
             if z_variance < (-1 * self.height_tolerance):
                 self.gcode.respond_info("Turn Left Tension Bolt CW by 1/8th \
                                     rotation and Right Tension Bolt \
