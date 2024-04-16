@@ -37,31 +37,20 @@ class ManualZTilt:
         #calculate the rotation required and round to nearest 0.25
         calculated_turn = round(abs(z_variance*self.thread_constant)*4)/4
         if abs(z_variance) < self.height_tolerance:
-            self.gcode.respond_info("Congratulations, \
-                                    Your X Axis is Calibrated!")
+            self.gcode.respond_info("Congratulations, Your X Axis is Calibrated!")
 
         elif calculated_turn < .25:
             if z_variance < (-1 * self.height_tolerance):
-                self.gcode.respond_info("Turn Left Tension Bolt CW by 1/8th \
-                                    rotation and Right Tension Bolt \
-                                    CCW 1/8th rotation")
+                self.gcode.respond_info("Turn Left Tension Bolt CW by 1/8th rotation and\n Right Tension Bolt CCW 1/8th rotation")
 
             elif z_variance > self.height_tolerance:
-                self.gcode.respond_info("Turn Left Tension Bolt CCW by 1/8th \
-                                    rotation and Right Tension Bolt \
-                                    CW 1/8th rotation")
+                self.gcode.respond_info("Turn Left Tension Bolt CCW by 1/8th rotation and\n Right Tension Bolt CW 1/8th rotation")
         else:
             if z_variance < (-1 * self.height_tolerance):
-                self.gcode.respond_info("Turn Left Tension Bolt CW by %.2f \
-                                    rotations and Right Tension Bolt \
-                                    CCW %.2f rotations" \
-                                    %(calculated_turn, calculated_turn))
+                self.gcode.respond_info("Turn Left Tension Bolt CW by %.2f rotations and\n Right Tension Bolt CCW %.2f rotations" %(calculated_turn, calculated_turn))
 
             elif z_variance > self.height_tolerance:
-                self.gcode.respond_info("Turn Left Tension Bolt CCW by %.2f \
-                                    rotations and Right Tension Bolt CW %.2f \
-                                    rotations" \
-                                    %(calculated_turn, calculated_turn))
+                self.gcode.respond_info("Turn Left Tension Bolt CCW by %.2f rotations and\n Right Tension Bolt CW %.2f rotations" %(calculated_turn, calculated_turn))
 
 def load_config(config):
     return ManualZTilt(config)
