@@ -49,18 +49,19 @@ class PIDCalibrate:
             "with these parameters and restart the printer."
             % (target, Kp, Ki, Kd, tolerance, profile))
         # Store results for SAVE_CONFIG
+        cfgname = heater.get_name()
         configfile = self.printer.lookup_object('configfile')
         section_name = (
             heater_name if profile == 'default'
             else ("pid_profile " + heater_name + " " + profile))
         control = 'pid_v' if old_control.get_type() == 'pid_v' else 'pid'
-        configfile.set(section_name, 'pid_version', heaters.PID_PROFILE_VERSION)
-        configfile.set(section_name, 'pid_target', "%.2f" % target)
-        configfile.set(section_name, 'pid_tolerance', "%.4f" % tolerance)
-        configfile.set(section_name, 'control', control)
-        configfile.set(section_name, 'pid_Kp', "%.3f" % (Kp,))
-        configfile.set(section_name, 'pid_Ki', "%.3f" % (Ki,))
-        configfile.set(section_name, 'pid_Kd', "%.3f" % (Kd,))
+        configfile.set(cfgname, 'pid_version', heaters.PID_PROFILE_VERSION)
+        configfile.set(cfgname, 'pid_target', "%.2f" % target)
+        configfile.set(cfgname, 'pid_tolerance', "%.4f" % tolerance)
+        configfile.set(cfgname, 'control', control)
+        configfile.set(cfgname, 'pid_Kp', "%.3f" % (Kp,))
+        configfile.set(cfgname, 'pid_Ki', "%.3f" % (Ki,))
+        configfile.set(cfgname, 'pid_Kd', "%.3f" % (Kd,))
 
 TUNE_PID_DELTA = 5.0
 TUNE_PID_TOL = 0.02
