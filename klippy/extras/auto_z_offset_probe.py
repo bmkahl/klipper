@@ -24,10 +24,8 @@ class AutoZOffsetProbe:
         self.multi_probe_begin = self.probe_wrapper.multi_probe_begin
         self.multi_probe_end = self.probe_wrapper.multi_probe_end
         # Common probe implementation helpers
-        self.cmd_helper = probe.ProbeCommandHelper(
-            config, self, self.probe_wrapper.query_endstop)
         self.probe_offsets = probe.ProbeOffsetsHelper(config)
-        self.probe_session = probe.ProbeSessionHelper(config, self)
+        self.probe_session = probe.ProbeSessionHelper(config, self, 'z_probe')
     def get_probe_params(self, gcmd=None):
         return self.probe_session.get_probe_params(gcmd)
     def get_offsets(self):
