@@ -164,6 +164,12 @@ class ProbeCommandHelper:
             return
         z_offset = self.probe.get_offsets()[2]
         new_calibrate = z_offset - offset
+        if new_calibrate < 0:
+            gcmd.respond_info(
+                "%s: z_offset: %.3f\n"
+                "Cannot save negative probe Z offset."
+                % (self.name, new_calibrate))
+            return
         gcmd.respond_info(
             "%s: z_offset: %.3f\n"
             "The SAVE_CONFIG command will update the printer config file\n"
